@@ -48,4 +48,24 @@ contract EmployeeStorage {
         // Safe: newTotal <= 5000, fits in uint16
         shares = uint16(newTotal);
     }
+
+    // ------------------------------------------------------------------
+    // Diagnostic helper functions (do not modify)
+    /**
+    * Do not modify this function.  It is used to enable the unit test for this pin
+    * to check whether or not you have configured your storage variables to make
+    * use of packing.
+    */
+    function checkForPacking(uint _slot) public view returns (uint r) {
+        assembly {
+            r := sload(_slot)
+        }
+    }
+
+    /**
+    * Warning: Anyone can use this function at any time!
+    */
+    function debugResetShares() public {
+        shares = 1000;
+    }
 }

@@ -31,4 +31,21 @@ contract EmployeeStorage {
     function viewShares() external view returns (uint16) {
         return shares;
     }
+
+    // Custom error for exceeding share limit
+    error TooManyShares(uint256 resultingShares);
+
+    // Adds shares to the employee, enforcing limits per spec
+    function grantShares(uint256 _newShares) external {
+        // If the incoming grant itself exceeds 5000, revert with string
+        if (_newShares > 5000) revert("Too many shares");
+
+        uint256 newTotal = uint256(shares) + _newShares;
+
+        // If resulting total would exceed 5000, revert with custom error
+        if (newTotal > 5000) revert TooManyShares(newTotal);
+
+        // Safe: newTotal <= 5000, fits in uint16
+        shares = uint16(newTotal);
+    }
 }

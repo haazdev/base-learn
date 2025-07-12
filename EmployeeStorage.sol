@@ -21,4 +21,14 @@ contract EmployeeStorage {
         salary = _salary;
         idNumber = _idNumber;
     }
+
+    // Returns the employee’s salary
+    function viewSalary() external view returns (uint24) {
+        return salary;
+    }
+
+    // Returns the employee’s share count
+    function viewShares() external view returns (uint16) {
+        return shares;
+    }
 }
